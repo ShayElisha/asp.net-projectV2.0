@@ -35,14 +35,14 @@ namespace BLL
             if (Client.CusId == -1)
             {
                 sql = "insert into T_Client(CusFullName,cusAddress,cusCityCode,cusPhone,cusMail,cusPassword) values ";
-                sql += $" N'{Client.CusFullName}',N'{Client.cusAddress}',N'{Client.cusCityCode}',N'{Client.cusPhone}',N'{Client.cusMail}',N'{Client.cusPassword}'";
+                sql += $" (N'{Client.CusFullName}',N'{Client.cusAddress}',N'{Client.cusCityCode}',N'{Client.cusPhone}',N'{Client.cusMail}',N'{Client.cusPassword}')";
             }
             else
             {
-                sql = "update T_Categort set ";
+                sql = "update T_Client set ";
                 sql += $" CusFullName=N'{Client.CusFullName}',";
                 sql += $" cusAddress=N'{Client.cusAddress}',";
-                sql += $" cusCityCode=N'{Client.cusCityCode}'";
+                sql += $" cusCityCode=N'{Client.cusCityCode}',";
                 sql += $" cusPhone=N'{Client.cusPhone}',";
                 sql += $" cusMail=N'{Client.cusMail}',";
                 sql += $" cusPassword=N'{Client.cusPassword}'";
@@ -63,7 +63,7 @@ namespace BLL
             List<client> allClients = new List<client>();
             conn = new SqlConnection(connStr);
             conn.Open();
-            sql = "SELECT * FROM T_Categort";
+            sql = "SELECT * FROM T_Client";
             cmd = new SqlCommand(sql, conn);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -85,7 +85,7 @@ namespace BLL
             HttpContext.Current.Application["Clients"] = allClients;
 
             // הפנייה לדף הרשימה
-            HttpContext.Current.Response.Redirect("CategoryList.aspx");
+            HttpContext.Current.Response.Redirect("ClientList.aspx");
         }
     }
 }

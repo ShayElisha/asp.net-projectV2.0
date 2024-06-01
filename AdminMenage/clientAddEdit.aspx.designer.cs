@@ -15,13 +15,13 @@ namespace web09052024.AdminMenage
     {
 
         /// <summary>
-        /// hidCid control.
+        /// hidCus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hidCid;
+        protected global::System.Web.UI.WebControls.HiddenField hidCus;
 
         /// <summary>
         /// cusFullName control.

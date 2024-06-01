@@ -35,7 +35,7 @@ namespace web09052024.AdminMenage
                             CusPhone.Text = Client[i].cusPhone;
                             CusMail.Text = Client[i].cusMail;
                             CusPassword.Text = Client[i].cusPassword;
-                            hidCid.Value = CusId;
+                            hidCus.Value = CusId;
                         }
                     }
                 }
@@ -44,7 +44,26 @@ namespace web09052024.AdminMenage
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            string sql = "";
+            client Client = new client();
+
+            // קביעת המזהה והשם של הלקוחות מהטופס
+            if (hidCus.Value == "-1")
+            {
+                Client.CusId = -1;
+            }
+            else
+            {
+                Client.CusId = int.Parse(hidCus.Value);
+            }
+            Client.CusFullName = cusFullName.Text;
+            Client.cusAddress = CusAddress.Text;
+            Client.cusCityCode = int.Parse(CusCityCode.Text);
+            Client.cusPhone = CusPhone.Text;
+            Client.cusMail = CusMail.Text;
+            Client.cusPassword = CusPassword.Text;
+            // שמירת העיר
+            Client.Save(Client);
+            /*string sql = "";
             if (hidCid.Value == "-1")
             {
                 sql = "insert into T_Client (CusFullName, cusAddress, cusCityCode, cusPhone, cusMail, cusPassword) values ";
@@ -87,8 +106,8 @@ namespace web09052024.AdminMenage
                 conn.Close();
 
                 Application["Clients"] = Clients;
-                Response.Redirect("ClientList.aspx");
-            }
+                Response.Redirect("ClientList.aspx");*/
+        
         }
     }
 }

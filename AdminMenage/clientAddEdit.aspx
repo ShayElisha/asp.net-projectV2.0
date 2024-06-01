@@ -18,7 +18,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <asp:HiddenField ID="hidCid" runat="server" Value="-1"/>
+                        <asp:HiddenField ID="hidCus" runat="server" Value="-1"/>
                             <div class="form-group">
                                 <label>שם מלא</label>
                                 <asp:TextBox ID="cusFullName" CssClass="form-control" runat="server" placeholder="נא הזן שם קטגוריה"/>
