@@ -1,4 +1,5 @@
 ﻿using DAL;
+using DATA;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -42,40 +43,10 @@ namespace BLL
                 sql += $" where Cid='{Category.Cid}'";
             }
 
-            string connStr = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
-            SqlConnection conn = new SqlConnection(connStr);
-            conn.Open();
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-
-            if (conn != null)
-            {
-                conn.Close();
-            }
-            // טעינת כל הערים לאחר עדכון/הוספה
-            List<category> allCategories = new List<category>();
-            conn = new SqlConnection(connStr);
-            conn.Open();
-            sql = "SELECT * FROM T_Categort";
-            cmd = new SqlCommand(sql, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                category c = new category()
-                {
-                    Cid = int.Parse(reader["Cid"].ToString()),
-                    Cname = reader["Cname"].ToString(),
-                    CDesc = reader["CDesc"].ToString(),
-                    CPic = reader["CPic"].ToString(),
-                };
-                allCategories.Add(c);
-            }
-            conn.Close();
-            // עדכון ה-Application עם הרשימה החדשה
-            HttpContext.Current.Application["categories"] = allCategories;
-
-            // הפנייה לדף הרשימה
-            HttpContext.Current.Response.Redirect("CategoryList.aspx");
+            DB_Context Db = new DB_Context();
+            Db.ExecuteNonQuery(sql);
+            GetAll();
+            
         }
     }
 }

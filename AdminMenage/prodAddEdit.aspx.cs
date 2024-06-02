@@ -75,6 +75,11 @@ namespace web09052024.AdminMenage
 
             // שמירת העיר
             Product.Save(Product);
+            // עדכון ה-Application עם הרשימה החדשה
+            Application["Prods"] = product.GetAll();
+
+            // הפנייה לדף הרשימה
+            Response.Redirect("productsList.aspx");
             /*string sql = "";
             if (hidPid.Value == "-1")
             {

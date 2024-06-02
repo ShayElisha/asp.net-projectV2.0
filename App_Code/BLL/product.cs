@@ -1,4 +1,5 @@
 ﻿using DAL;
+using DATA;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -44,41 +45,10 @@ namespace BLL
                 sql += $"WHERE Pid = {Product.Pid}";
             }
 
-            string connStr = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
-            SqlConnection conn = new SqlConnection(connStr);
-            conn.Open();
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-
-            if (conn != null)
-            {
-                conn.Close();
-            }
-            // טעינת כל הערים לאחר עדכון/הוספה
-            List<product> allProducts = new List<product>();
-            conn = new SqlConnection(connStr);
-            conn.Open();
-            sql = "SELECT * FROM T_Product";
-            cmd = new SqlCommand(sql, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                product c = new product()
-                {
-                    Pid = int.Parse(reader["Pid"].ToString()),
-                    pName = reader["pName"].ToString(),
-                    pDesc = reader["pDesc"].ToString(),
-                    price = float.Parse(reader["price"].ToString()),
-                    PicName = reader["PicName"].ToString(),
-                };
-                allProducts.Add(c);
-            }
-            conn.Close();
-            // עדכון ה-Application עם הרשימה החדשה
-            HttpContext.Current.Application["Prods"] = allProducts;
-
-            // הפנייה לדף הרשימה
-            HttpContext.Current.Response.Redirect("productsList.aspx");
+            DB_Context Db = new DB_Context();
+            Db.ExecuteNonQuery(sql);
+            GetAll();
+            
         }
     }
 }

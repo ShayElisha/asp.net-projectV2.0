@@ -63,6 +63,11 @@ namespace web09052024.AdminMenage
             Client.cusPassword = CusPassword.Text;
             // שמירת העיר
             Client.Save(Client);
+            // עדכון ה-Application עם הרשימה החדשה
+            Application["Clients"] = client.GetAll();
+
+            // הפנייה לדף הרשימה
+            Response.Redirect("ClientList.aspx");
             /*string sql = "";
             if (hidCid.Value == "-1")
             {
@@ -107,7 +112,7 @@ namespace web09052024.AdminMenage
 
                 Application["Clients"] = Clients;
                 Response.Redirect("ClientList.aspx");*/
-        
+
         }
     }
 }

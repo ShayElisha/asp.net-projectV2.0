@@ -1,4 +1,5 @@
 ﻿using DAL;
+using DATA;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -34,38 +35,10 @@ namespace BLL
                 sql += $"WHERE CityId = {city.CityId}";
             }
 
-            string connStr = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
-            SqlConnection conn = new SqlConnection(connStr);
-            conn.Open();
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
+            DB_Context Db = new DB_Context();
+            Db.ExecuteNonQuery(sql);
+            GetAll();
 
-            if (conn != null)
-            {
-                conn.Close();
-            }
-            // טעינת כל הערים לאחר עדכון/הוספה
-            List<cities> allCities = new List<cities>();
-            conn = new SqlConnection(connStr);
-            conn.Open();
-            sql = "SELECT * FROM T_Cities";
-            cmd = new SqlCommand(sql, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                cities c = new cities()
-                {
-                    CityId = int.Parse(reader["CityId"].ToString()),
-                    CityName = reader["CityName"].ToString(),
-                };
-                allCities.Add(c);
-            }
-            conn.Close();
-            // עדכון ה-Application עם הרשימה החדשה
-            HttpContext.Current.Application["cities"] = allCities;
-
-            // הפנייה לדף הרשימה
-            HttpContext.Current.Response.Redirect("citiesList.aspx");
         }
     }
 }

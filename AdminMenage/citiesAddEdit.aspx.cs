@@ -66,34 +66,38 @@ namespace web09052024.AdminMenage
 
             // שמירת העיר
             city.Save(city);
+            // עדכון ה-Application עם הרשימה החדשה
+            Application["cities"] = cities.GetAll() ;
+
+            // הפנייה לדף הרשימה
+            Response.Redirect("citiesList.aspx");
 
 
+            /*
+                        string connStr = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+                        SqlConnection conn = new SqlConnection(connStr);
+                        conn.Open();
+                        string sql = "select * from T_Cities";
+                        SqlCommand cmd = new SqlCommand(sql, conn);
+                        cmd.ExecuteNonQuery();
 
-/*
-            string connStr = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
-            SqlConnection conn = new SqlConnection(connStr);
-            conn.Open();
-            string sql = "select * from T_Cities";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
+                        List<cities> cit = new List<cities>();
+                        sql = "select * from T_Cities";
+                        cmd.CommandText = sql;
+                        SqlDataReader Dr = cmd.ExecuteReader();
+                        while (Dr.Read())
+                        {
+                            cities C = new cities()
+                            {
+                                CityId = int.Parse(Dr["CityId"] + ""),
+                                CityName = Dr["CityName"] + "",
+                            };
+                            cit.Add(C);
+                        }
+                        conn.Close();
 
-            List<cities> cit = new List<cities>();
-            sql = "select * from T_Cities";
-            cmd.CommandText = sql;
-            SqlDataReader Dr = cmd.ExecuteReader();
-            while (Dr.Read())
-            {
-                cities C = new cities()
-                {
-                    CityId = int.Parse(Dr["CityId"] + ""),
-                    CityName = Dr["CityName"] + "",
-                };
-                cit.Add(C);
-            }
-            conn.Close();
-
-            Application["cities"] = cit;
-            Response.Redirect("citiesList.aspx");*/
+                        Application["cities"] = cit;
+                        Response.Redirect("citiesList.aspx");*/
         }
     }
 }

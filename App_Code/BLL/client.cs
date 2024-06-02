@@ -7,6 +7,7 @@ using System.Web;
 using DAL;
 using System.Configuration;
 using System.Data.SqlClient;
+using DATA;
 
 namespace BLL
 {
@@ -49,43 +50,9 @@ namespace BLL
                 sql += $" where CusId='{Client.CusId}'";
             }
 
-            string connStr = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
-            SqlConnection conn = new SqlConnection(connStr);
-            conn.Open();
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-
-            if (conn != null)
-            {
-                conn.Close();
-            }
-            // טעינת כל הערים לאחר עדכון/הוספה
-            List<client> allClients = new List<client>();
-            conn = new SqlConnection(connStr);
-            conn.Open();
-            sql = "SELECT * FROM T_Client";
-            cmd = new SqlCommand(sql, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                client c = new client()
-                {
-                    CusId = int.Parse(reader["CusId"].ToString()),
-                    CusFullName = reader["CusFullName"].ToString(),
-                    cusAddress = reader["cusAddress"].ToString(),
-                    cusCityCode = (int)reader["cusCityCode"],
-                    cusPhone = reader["cusPhone"].ToString(),
-                    cusMail = reader["cusMail"].ToString(),
-                    cusPassword = (string)reader["cusPassword"]
-                };
-                allClients.Add(c);
-            }
-            conn.Close();
-            // עדכון ה-Application עם הרשימה החדשה
-            HttpContext.Current.Application["Clients"] = allClients;
-
-            // הפנייה לדף הרשימה
-            HttpContext.Current.Response.Redirect("ClientList.aspx");
+            DB_Context Db = new DB_Context();
+            Db.ExecuteNonQuery(sql);
+            GetAll();
         }
     }
 }

@@ -118,6 +118,10 @@ namespace web09052024.AdminMenage
 
             // שמירת העיר
             Category.Save(Category);
+            Application["categories"] = category.GetAll();
+
+            // הפנייה לדף הרשימה
+            Response.Redirect("CategoryList.aspx");
         }
     }
 }
