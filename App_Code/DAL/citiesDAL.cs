@@ -11,7 +11,7 @@ using System.Web;
 
 namespace DAL
 {
-    public class citiesDAL
+    public class citiesDAL:cities
     {
         public static List<cities> GetAll()
         {
@@ -48,6 +48,25 @@ namespace DAL
             Db.Close();
             return city;
         }
-        
+        public  cities Save(cities city)
+        {
+            string sql;
+            if (city.CityId == -1)
+            {
+                sql = "INSERT INTO T_Cities (CityName) VALUES ";
+                sql += $"(N'{city.CityName}')";
+            }
+            else
+            {
+                sql = "UPDATE T_Cities SET ";
+                sql += $"CityName = N'{city.CityName}' ";
+                sql += $"WHERE CityId = {city.CityId}";
+            }
+
+            DB_Context Db = new DB_Context();
+            Db.ExecuteNonQuery(sql);
+            GetAll();
+            return city;
+        }
     }
 }

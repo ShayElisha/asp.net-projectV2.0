@@ -20,25 +20,10 @@ namespace BLL
         {
             return citiesDAL.GetAll();
         }
-        public void Save(cities city)
+        public cities Save(cities city)
         {
-            string sql;
-            if (city.CityId == -1)
-            {
-                sql = "INSERT INTO T_Cities (CityName) VALUES ";
-                sql += $"(N'{city.CityName}')";
-            }
-            else
-            {
-                sql = "UPDATE T_Cities SET ";
-                sql += $"CityName = N'{city.CityName}' ";
-                sql += $"WHERE CityId = {city.CityId}";
-            }
-
-            DB_Context Db = new DB_Context();
-            Db.ExecuteNonQuery(sql);
-            GetAll();
-
+            citiesDAL dal = new citiesDAL();
+            return dal.Save(city);
         }
     }
 }

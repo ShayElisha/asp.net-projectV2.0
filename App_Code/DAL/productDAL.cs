@@ -52,6 +52,29 @@ namespace DAL
             Db.Close();
             return product;   
         }
+        public product Save(product Product)
+        {
+            string sql = "";
+            if (Product.Pid == -1)
+            {
+                sql = "INSERT INTO T_Product (pName, pDesc, price, PicName) VALUES ";
+                sql += $"(N'{Product.pName}', N'{Product.pDesc}', {Product.price}, N'{Product.PicName}')";
+            }
+            else
+            {
+                sql = "UPDATE T_Product SET ";
+                sql += $"pName = N'{Product.pName}', ";
+                sql += $"pDesc = N'{Product.pDesc}', ";
+                sql += $"price = {Product.price}, ";
+                sql += $"PicName = N'{Product.PicName}' ";
+                sql += $"WHERE Pid = {Product.Pid}";
+            }
+
+            DB_Context Db = new DB_Context();
+            Db.ExecuteNonQuery(sql);
+            GetAll();
+            return Product;
+        }
     }
    
     

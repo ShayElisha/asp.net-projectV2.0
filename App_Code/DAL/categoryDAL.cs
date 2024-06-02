@@ -8,7 +8,7 @@ using System.Web;
 
 namespace DAL
 {
-    public class categoryDAL
+    public class categoryDAL:category
     {
         public static List<category> GetAll()
         {
@@ -48,6 +48,28 @@ namespace DAL
             }
             Db.Close();
             return Cat;
+        }
+        public category Save(category Category)
+        {
+            string sql = "";
+            if (Category.Cid == -1)
+            {
+                sql = "insert into T_Categort(Cname,CDesc,CPic) values ";
+                sql += $" N'{Category.Cname}',N'{Category.CDesc}',N'{Category.CPic}'";
+            }
+            else
+            {
+                sql = "update T_Categort set ";
+                sql += $" Cname=N'{Category.Cname}',";
+                sql += $" CDesc=N'{Category.CDesc}',";
+                sql += $" CPic=N'{Category.CPic}'";
+                sql += $" where Cid='{Category.Cid}'";
+            }
+
+            DB_Context Db = new DB_Context();
+            Db.ExecuteNonQuery(sql);
+            GetAll();
+            return Category;
         }
     }
 }

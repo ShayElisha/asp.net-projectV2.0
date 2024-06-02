@@ -26,27 +26,10 @@ namespace BLL
         {
             return categoryDAL.GetById(Id);
         }
-        public void Save(category Category)
+        public category Save(category Category)
         {
-            string sql = "";
-            if (Category.Cid == -1)
-            {
-                sql = "insert into T_Categort(Cname,CDesc,CPic) values ";
-                sql += $" N'{Category.Cname}',N'{Category.CDesc}',N'{Category.CPic}'";
-            }
-            else
-            {
-                sql = "update T_Categort set ";
-                sql += $" Cname=N'{Category.Cname}',";
-                sql += $" CDesc=N'{Category.CDesc}',";
-                sql += $" CPic=N'{Category.CPic}'";
-                sql += $" where Cid='{Category.Cid}'";
-            }
-
-            DB_Context Db = new DB_Context();
-            Db.ExecuteNonQuery(sql);
-            GetAll();
-            
+            categoryDAL Dal= new categoryDAL();
+             return Dal.Save(Category);
         }
     }
 }
