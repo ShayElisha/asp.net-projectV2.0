@@ -29,8 +29,7 @@ namespace BLL
         }
         public product Save(product Product)
         {
-            productDAL Dal = new productDAL();
-            return Dal.Save(Product);
+            return productDAL.Save(Product);
         }
     }
 }

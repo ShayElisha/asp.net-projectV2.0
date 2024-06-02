@@ -22,8 +22,7 @@ namespace BLL
         }
         public cities Save(cities city)
         {
-            citiesDAL dal = new citiesDAL();
-            return dal.Save(city);
+            return citiesDAL.Save(city);
         }
     }
 }

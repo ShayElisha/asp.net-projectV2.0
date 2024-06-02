@@ -55,7 +55,7 @@ namespace DAL
             Db.Close();
             return Clients ;
         }
-        public client Save(client Client)
+        public static client Save(client Client)
         {
             string sql = "";
             if (Client.CusId == -1)

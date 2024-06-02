@@ -48,7 +48,7 @@ namespace DAL
             Db.Close();
             return city;
         }
-        public  cities Save(cities city)
+        public static  cities Save(cities city)
         {
             string sql;
             if (city.CityId == -1)

@@ -49,7 +49,7 @@ namespace DAL
             Db.Close();
             return Cat;
         }
-        public category Save(category Category)
+        public static category Save(category Category)
         {
             string sql = "";
             if (Category.Cid == -1)

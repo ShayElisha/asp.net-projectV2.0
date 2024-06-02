@@ -28,8 +28,7 @@ namespace BLL
         }
         public category Save(category Category)
         {
-            categoryDAL Dal= new categoryDAL();
-             return Dal.Save(Category);
+             return categoryDAL.Save(Category);
         }
     }
 }

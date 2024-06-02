@@ -32,8 +32,7 @@ namespace BLL
         }
         public client Save(client Client)
         {
-            clientDAL Dal = new clientDAL();
-            return Dal.Save(Client);
+            return clientDAL.Save(Client);
         }
     }
 }

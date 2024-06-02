@@ -52,7 +52,7 @@ namespace DAL
             Db.Close();
             return product;   
         }
-        public product Save(product Product)
+        public static product Save(product Product)
         {
             string sql = "";
             if (Product.Pid == -1)
