@@ -62,7 +62,7 @@ namespace web09052024.AdminMenage
             Client.cusMail = CusMail.Text;
             Client.cusPassword = CusPassword.Text;
             // שמירת העיר
-            Client.Save(Client);
+            Client.Save();
             // עדכון ה-Application עם הרשימה החדשה
             Application["Clients"] = client.GetAll();
 

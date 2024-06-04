@@ -74,7 +74,7 @@ namespace web09052024.AdminMenage
             Product.PicName = picName;
 
             // שמירת העיר
-            Product.Save(Product);
+            Product.Save();
             // עדכון ה-Application עם הרשימה החדשה
             Application["Prods"] = product.GetAll();
 

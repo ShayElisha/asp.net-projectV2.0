@@ -20,9 +20,9 @@ namespace BLL
         {
             return citiesDAL.GetAll();
         }
-        public cities Save(cities city)
+        public cities Save()
         {
-            return citiesDAL.Save(city);
+            return citiesDAL.Save(this);
         }
     }
 }

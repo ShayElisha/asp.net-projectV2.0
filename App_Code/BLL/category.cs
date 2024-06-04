@@ -26,9 +26,9 @@ namespace BLL
         {
             return categoryDAL.GetById(Id);
         }
-        public category Save(category Category)
+        public category Save()
         {
-             return categoryDAL.Save(Category);
+             return categoryDAL.Save(this);
         }
     }
 }

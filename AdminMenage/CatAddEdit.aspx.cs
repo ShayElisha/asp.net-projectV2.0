@@ -117,7 +117,7 @@ namespace web09052024.AdminMenage
             Category.CPic = PicName;
 
             // שמירת העיר
-            Category.Save(Category);
+            Category.Save();
             Application["categories"] = category.GetAll();
 
             // הפנייה לדף הרשימה

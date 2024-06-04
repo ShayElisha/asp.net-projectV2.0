@@ -65,7 +65,7 @@ namespace web09052024.AdminMenage
             city.CityName = TxtCname.Text;
 
             // שמירת העיר
-            city.Save(city);
+            city.Save();
             // עדכון ה-Application עם הרשימה החדשה
             Application["cities"] = cities.GetAll() ;
 

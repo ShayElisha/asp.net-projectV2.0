@@ -30,9 +30,9 @@ namespace BLL
         {
             return clientDAL.GetById(Id);
         }
-        public client Save(client Client)
+        public client Save()
         {
-            return clientDAL.Save(Client);
+            return clientDAL.Save(this);
         }
     }
 }

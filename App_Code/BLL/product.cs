@@ -27,9 +27,9 @@ namespace BLL
         {
             return productDAL.GetById(Id);
         }
-        public product Save(product Product)
+        public product Save()
         {
-            return productDAL.Save(Product);
+            return productDAL.Save(this);
         }
     }
 }
